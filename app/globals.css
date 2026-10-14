@@ -1,0 +1,192 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: var(--font-geist-sans), 'Geist Fallback';
+  --font-mono: var(--font-geist-mono), 'Geist Mono Fallback';
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-signal: var(--signal);
+  --color-signal-2: var(--signal-2);
+  --color-beam: var(--beam);
+
+  /* ZQUENCE (scoped to /zquence) */
+  --font-zq: var(--font-space-grotesk), sans-serif;
+  --color-zq-teal: #00a89d;
+  --color-zq-teal-dark: #008078;
+  --color-zq-dark: #0a0a0a;
+  --color-zq-dark2: #111111;
+  --color-zq-dark3: #1a1a1a;
+  --color-zq-gray: #888888;
+  --color-zq-gray-light: #cccccc;
+  --color-zq-gold: #f5a623;
+  --color-zq-silver: #c0c0c0;
+  --color-zq-diamond: #88eeff;
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+:root {
+  color-scheme: dark;
+  --radius: 0.25rem;
+
+  --background: oklch(0.09 0.006 60);
+  --foreground: oklch(0.95 0.006 95);
+
+  --card: oklch(0.13 0.006 60);
+  --card-foreground: oklch(0.95 0.006 95);
+  --popover: oklch(0.13 0.006 60);
+  --popover-foreground: oklch(0.95 0.006 95);
+
+  /* Signal orange */
+  --primary: oklch(0.685 0.205 38);
+  --primary-foreground: oklch(0.12 0.01 60);
+
+  --secondary: oklch(0.17 0.006 60);
+  --secondary-foreground: oklch(0.95 0.006 95);
+  --muted: oklch(0.17 0.006 60);
+  --muted-foreground: oklch(0.66 0.008 80);
+
+  /* Cool beam accent, used sparingly */
+  --accent: oklch(0.78 0.11 230);
+  --accent-foreground: oklch(0.12 0.01 60);
+
+  --destructive: oklch(0.62 0.22 25);
+  --border: oklch(0.95 0.006 95 / 12%);
+  --input: oklch(0.95 0.006 95 / 16%);
+  --ring: oklch(0.685 0.205 38);
+
+  --signal: #ff5a1f;
+  --signal-2: #ff8a3d;
+  --beam: #57c3ff;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* ---------- Brand animations ---------- */
+@keyframes zx-aurora {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(2%, -3%, 0) scale(1.12);
+    opacity: 1;
+  }
+}
+
+@keyframes zx-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes zx-blink {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  61%,
+  100% {
+    opacity: 0.15;
+  }
+}
+
+@keyframes zx-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes zx-scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes zx-rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.zx-aurora {
+  animation: zx-aurora 14s ease-in-out infinite;
+}
+.zx-float {
+  animation: zx-float 7s ease-in-out infinite;
+}
+.zx-blink {
+  animation: zx-blink 1.4s steps(1) infinite;
+}
+.zx-marquee {
+  animation: zx-marquee 32s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zx-aurora,
+  .zx-float,
+  .zx-blink,
+  .zx-marquee {
+    animation: none !important;
+  }
+}
